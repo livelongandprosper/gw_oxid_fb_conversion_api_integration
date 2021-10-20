@@ -1,4 +1,4 @@
-# SEO module
+# Facebook Conversion API Integration Module
 
 Module that integrates Facebook Conversion API to OXID eShop
 
