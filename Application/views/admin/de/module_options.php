@@ -25,8 +25,9 @@ use OxidEsales\Eshop\Core\Registry;
 $aLang = [
     'charset' => 'UTF-8',
 
-    'SHOP_MODULE_GROUP_gw_oxid_fb_conversion_api_integration_settings'                  => 'Facebook Conversion API Optionen',
-    'SHOP_MODULE_GROUP_gw_oxid_fb_conversion_api_integration_test_settings'             => 'Facebook Conversion API Test-Optionen',
+    'SHOP_MODULE_GROUP_gw_oxid_fb_conversion_api_integration_settings'                  => 'Facebook Conversion API - Grundkonfiguration',
+	'SHOP_MODULE_GROUP_gw_oxid_fb_conversion_api_integration_purchase_addinfo_settings' => 'Facebook Conversion API - Zu übermittelnde Benutzer-Zusatzfelder für Kauf-Event',
+    'SHOP_MODULE_GROUP_gw_oxid_fb_conversion_api_integration_test_settings'             => 'Facebook Conversion API - Event-Test-Optionen',
 
     'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_key'                         => 'Conversion API Key',
     'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_key'                    => '',
@@ -34,9 +35,23 @@ $aLang = [
     'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_pixelid'                    => '',
     'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_apiversion'                         => 'FB Pixel ID',
     'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_apiversion'                    => '',
-    'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_testcode'                         => 'Test-Code (Wert für test_event_code; z.B: {test_event_code: TEST9325})',
-    'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_testcode'                    => 'Bei jeder Event-Übermittlung an Facebook wird ein Fekd test_event_code mit dem hier angegebenen Wert übermittelt. So kann man die Einbindung unter "Events testen" überprüfen. Für dne Livebetrieb, muss dieses Feld wieder geleert werden.',
 
+	'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_phone'                         => 'Telefonnummer',
+	'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_phone'                    => 'Wird gehasht (sha256) übergeben.',
+	'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_firstname'                         => 'Vorname (Rechnungsadresse)',
+	'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_firstname'                    => 'Wird gehasht (sha256) übergeben.',
+	'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_lastname'                         => 'Nachname (Rechnungsadresse)',
+	'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_lastname'                    => 'Wird gehasht (sha256) übergeben.',
+	'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_city'                         => 'Stadt (Rechnungsadresse)',
+	'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_city'                    => 'Wird gehasht (sha256) übergeben.',
+	'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_zip'                         => 'Postleitzahl (Rechnungsadresse)',
+	'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_zip'                    => 'Wird gehasht (sha256) übergeben.',
+	'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_country'                         => 'Land (Rechnungsadresse)',
+	'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_country'                    => 'Wird gehasht (sha256) übergeben.',
+	'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_ip'                         => 'IP-Adresse',
+	'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_purchase_addinfo_ip'                    => 'Wird <strong>nicht</strong> gehasht übergeben (ggf. aktuelle Datenschutz-Vorgaben beachten).',
 
+	'SHOP_MODULE_gw_oxid_fb_conversion_api_integration_testcode'                         => 'Test-Code (Wert für test_event_code; z.B: {test_event_code: TEST9325})',
+	'HELP_SHOP_MODULE_gw_oxid_fb_conversion_api_integration_testcode'                    => 'Bei jeder Event-Übermittlung an Facebook wird ein Fekd test_event_code mit dem hier angegebenen Wert übermittelt. So kann man die Einbindung unter "Events testen" überprüfen. Für dne Livebetrieb, muss dieses Feld wieder geleert werden.',
 
 ];

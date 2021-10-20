@@ -51,9 +51,12 @@ class ThankYouController extends ThankYouController_parent {
 							"currency" => $currency->name,
 							"value" => $fBasketPrice,
 						],
-						"user_data" => [
-							"em" => array(hash("sha256", $oBasketUser->oxuser__oxusername->value))
-						],
+						"user_data" => array_merge(
+							$this->getAdditionalPurchaseUserData(),
+							[
+								"em" => array(hash("sha256", $oBasketUser->oxuser__oxusername->value))
+							]
+						),
 					)
 				)
 			);
@@ -163,6 +166,56 @@ class ThankYouController extends ThankYouController_parent {
 		curl_close ($curl_connection);
 
 		return json_decode($response); // parse json string to object and return
+	}
+
+	/**
+	 * @see https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/customer-information-parameters#fn
+	 * @return array
+	 */
+	private function getAdditionalPurchaseUserData() {
+		$returnValue = [];
+		$oBasket = $this->getBasket();
+		$oBasketUser = $oBasket->getBasketUser();
+		$oConfig = $this->getConfig();
+
+		if($oConfig->getConfigParam('gw_oxid_fb_conversion_api_integration_purchase_addinfo_phone')) {
+			if($oBasketUser->oxuser__oxfon->value) {
+				$returnValue['ph'] = hash("sha256", $oBasketUser->oxuser__oxfon->value);
+			}
+		}
+		if($oConfig->getConfigParam('gw_oxid_fb_conversion_api_integration_purchase_addinfo_firstname')) {
+			if($oBasketUser->oxuser__oxfname->value) {
+				$returnValue['fn'] = hash("sha256", $oBasketUser->oxuser__oxfname->value);
+			}
+		}
+		if($oConfig->getConfigParam('gw_oxid_fb_conversion_api_integration_purchase_addinfo_lastname')) {
+			if($oBasketUser->oxuser__oxlname->value) {
+				$returnValue['ln'] = hash("sha256", strtolower($oBasketUser->oxuser__oxlname->value));
+			}
+		}
+		if($oConfig->getConfigParam('gw_oxid_fb_conversion_api_integration_purchase_addinfo_city')) {
+			if($oBasketUser->oxuser__oxcity->value) {
+				$returnValue['ct'] = hash("sha256", strtolower($oBasketUser->oxuser__oxcity->value));
+			}
+		}
+		if($oConfig->getConfigParam('gw_oxid_fb_conversion_api_integration_purchase_addinfo_zip')) {
+			if($oBasketUser->oxuser__oxcity->value) {
+				$returnValue['zp'] = hash("sha256", strtolower($oBasketUser->oxuser__oxcity->value));
+			}
+		}
+		if($oConfig->getConfigParam('gw_oxid_fb_conversion_api_integration_purchase_addinfo_country')) {
+			$oCountry = oxNew(\OxidEsales\Eshop\Application\Model\Country::class);
+			$oCountry->load($oBasketUser->oxuser__oxcountryid->value);
+			if($oCountry->oxcountry__oxisoalpha2->value) {
+				$returnValue['country'] = hash("sha256", strtolower($oCountry->oxcountry__oxisoalpha2->value));
+			}
+		}
+		if($oConfig->getConfigParam('gw_oxid_fb_conversion_api_integration_purchase_addinfo_ip')) {
+			if($ipAddress = $_SERVER['REMOTE_ADDR']) {
+				$returnValue['client_ip_address'] = $ipAddress;
+			}
+		}
+		return $returnValue;
 	}
 
 }
