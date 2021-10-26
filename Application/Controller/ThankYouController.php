@@ -45,7 +45,7 @@ class ThankYouController extends ThankYouController_parent {
 						"event_name" => "Purchase",
 						"event_time" => time(),
 						"action_source" => "website",
-						"event_id" => "purchase.".$oBasket->getOrderId(),
+						"event_id" => "purchase.".$oBasket->getOrderId()."_api",
 						"event_source_url" => (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",
 						"custom_data" => [
 							"currency" => $currency->name,
