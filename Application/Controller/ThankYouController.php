@@ -45,7 +45,7 @@ class ThankYouController extends ThankYouController_parent {
 						"event_name" => "Purchase",
 						"event_time" => time(),
 						"action_source" => "website",
-						"event_id" => "purchase.".$oBasket->getOrderId()."_api",
+						"event_id" => "purchase.".md5($oBasket->getOrderId()),
 						"event_source_url" => (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",
 						"custom_data" => [
 							"currency" => $currency->name,
@@ -64,7 +64,7 @@ class ThankYouController extends ThankYouController_parent {
 		} else {
 			$oBasket = $this->getBasket();
 			$logger = Registry::getLogger();
-			$logger->error("gw_oxid_fb_conversion_api_integration: credentials are not completely set, event_id: ". "purchase.".$oBasket->getOrderId() ."", []);
+			$logger->error("gw_oxid_fb_conversion_api_integration: credentials are not completely set, event_id: ". "purchase.".md5($oBasket->getOrderId()) ."", []);
 		}
 		return $return_value;
 	}
